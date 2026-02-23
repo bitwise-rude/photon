@@ -30,10 +30,15 @@ typedef struct {
 	Memory* mem;
 }Machine;
 
+// Machine + CPU related function
+u8 get_val_at_pc(Machine* vm) {
+	// returns the value pointed by PC and increments the PC
+	 return vm->mem->stream[vm->PC.val ++];
+}
 int main()
 {
 	// creating the memory
-	u8 stream[1024] = {0x00, 0x77};
+	u8 stream[1024] = {0xea, 0xea, 0xea};
 	Memory mem = (Memory) {
 		.stream = 0,
 	};
@@ -47,19 +52,24 @@ int main()
 		.mem = &mem,
 	};
 			
-	// fetch
-	u8 opcode = vm.mem->stream[vm.PC.val];
-	printf("The OPCODE Fetched is 0x%x\n", opcode);
+	// the fetch, decode and execute loop
+	
+	for (int i=0;i<9;i++) {
+		// fetch
+		u8 opcode = get_val_at_pc(&vm);
+		printf("\nThe OPCODE Fetched is 0x%x\n", opcode);
 
-	// execute
-	switch (opcode) {
-		case 0x00:
-			printf("NOP EXECUTED\n");
-			break;
-		default:
-			printf("INSTRUCTION NOT IMPLEMENTED\n");
-			exit(69);
-			break;
+		// execute
+		switch (opcode) {
+			case 0xEA:
+				printf("NOP EXECUTED\n");
+				break;
+			default:
+				printf("INSTRUCTION NOT IMPLEMENTED\n");
+				exit(69);
+				break;
+		}
 	}
-	return  0;
+
+	return 0;
 }

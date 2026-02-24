@@ -11,7 +11,7 @@ u8 get_val_at_pc(Machine* vm) {
 int main()
 {
 	// creating the memory
-	u8 stream[1024] = {0xea, 0xea, 0xea};
+	u8 stream[1024] = {0xea, 0xea, 0x10};
 	Memory mem = (Memory) {
 		.stream = 0,
 	};
@@ -21,7 +21,16 @@ int main()
 	Machine vm = (Machine) {
 		.regA = {0},
 		.regB = {0},
+		.regC = {0},
+		.regD = {0},
+		.regH = {0},
+		.regL = {0},
+		.regF = {0},
+
 		.PC.val = 0,
+		.SP.val = 0,
+
+		.cycles=0,
 		.mem = &mem,
 	};
 			
@@ -30,18 +39,34 @@ int main()
 	for (int i=0;i<9;i++) {
 		// fetch
 		u8 opcode = get_val_at_pc(&vm);
-		printf("\nThe OPCODE Fetched is 0x%x\n", opcode);
 
-		// execute
+		u8 opcode_hi = get_nibble_hi(opcode);
+		u8 opcode_lo = get_nibble_lo(opcode);
+
+		DPRINTF("\nTHE OPCODE FETCHED IS 0x%x", opcode);
+
+		// executing register based instructions
+		switch (opcode_hi) {
+			case 0x1:
+				DPRINTF("ADD Instruction Executed");
+				break;
+			default:
+				break;
+				
+		}
+
+		// executing other single byte opcode instructions
 		switch (opcode) {
 			case 0xEA:
-				printf("NOP EXECUTED\n");
+				DPRINTF("NOP EXECUTED");
 				break;
 			default:
 				printf("INSTRUCTION NOT IMPLEMENTED\n");
 				exit(69);
 				break;
 		}
+
+		vm.cycles += 1;
 	}
 
 	return 0;

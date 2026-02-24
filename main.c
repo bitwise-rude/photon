@@ -44,33 +44,39 @@ int main()
 
 		// executing single byte opcode instructions
 		switch (opcode) {
+			// Movs
+			case 0x20:
+				DPRINTF("MOV A,B");
+
+			// Adds
 			case 0x10:
-				DPRINTF("ADD A, B EXECUTED");
+				DPRINTF("ADD A, B");
 				vm.AF.hi += vm.BC.hi;
 				break;
 
 			case 0x11:
-				DPRINTF("ADD A, C EXECUTED");
+				DPRINTF("ADD A, C");
 				vm.AF.hi += vm.BC.lo;
 				break;
 
 			case 0x12:
-				DPRINTF("ADD A, D EXECUTED");
+				DPRINTF("ADD A, D");
 				vm.AF.hi += vm.DE.hi;
 				break;
 
 			case 0x13:
-				DPRINTF("ADD A, E EXECUTED");
+				DPRINTF("ADD A, E");
 				vm.AF.hi += vm.DE.lo;
 				break;
 
 			case 0x14:
-				DPRINTF("ADD A, F EXECUTED");
+				DPRINTF("ADD A, F");
 				vm.AF.hi += vm.AF.lo;
 				break;
 
+			// NOPS
 			case 0xEA:
-				DPRINTF("NOP EXECUTED");
+				DPRINTF("NOP");
 				break;
 
 			default:

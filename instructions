@@ -1,10 +1,16 @@
 ea - NOP - Do nothing
+
 10 - ADD A,B - Adds A and B and stores in A
 11 - ADD A,C - Adds A and C and stores in A
 12 - ADD A,D - Adds A and D and storees in A
 13 - ADD A,E - Adds A and E and stores in A
 14 - ADD A,F - Adds A and F and stores in A
 
+20 - MOV A,B - Moves B's content to A
+21 - MOV A,C - Moves C's content to A
+22 - MOV A,D - Moves D's content to A
+23 - MOV A,E - Moves E's content to A
+24 - MOV A,F - Moves F's content to A
 
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 

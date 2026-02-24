@@ -6,11 +6,12 @@ u8 get_val_at_pc(Machine* vm) {
 	// returns the value pointed by PC and increments the PC
 	 return vm->mem->stream[vm->PC.val ++];
 }
+void execute(Machine* vm, u8 opcode);
 
 int main()
 {
 	// creating the memory
-	u8 stream[1024] = {0xea, 0xea, 0x10};
+	u8 stream[1024] = {0xea, 0x50,59,0x51,10, 0x10};
 	Memory mem = (Memory) {
 		.stream = 0,
 	};
@@ -37,8 +38,9 @@ int main()
 		u8 opcode = get_val_at_pc(&vm);
 
 		DPRINTF("\nTHE OPCODE FETCHED IS 0x%x", opcode);
-
+		execute(&vm, opcode);
 		vm.cycles += 1;
+		printf("The value at regiser A is %d\n",vm.AF.hi);
 	}
 
 	return 0;

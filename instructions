@@ -24,6 +24,15 @@ ea - NOP - Do nothing
 2E - MOV B,F - Moves F's content to B
 2F - MOV B,M - Moves Memory pointed by HL to B
 
+30 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
+
+40 - CMP A,B - Subtracs B's content from A but doesn't store the result but zero flag and carry flag are affected
+
+50 - MVI A, <immediate> - Moves the immediate value to register A
+51 - MVI B, <immediate> - Moves the immediate value to register B
+
+A0 - JZ addr - Jumps to addr if the zero flag is set 
+
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 
 nibbles and the HI nibble will generally contain the instruction
@@ -55,6 +64,7 @@ CMP - > 0100
 1. Flags
 Flag occpy the lower byte of AF register
 the bit information for each bit in the F register is:
+
 01234567
 0 -> ZERO FLAG ( the previous operation resulted in accumulator to be zero)
 1 -> CARRY FLAG ( the previous operation caused a carry, if in cmp, A is less than the argument)

@@ -11,12 +11,10 @@ static inline u8 get_pc_8(Machine* vm) {
 	 return vm->mem->stream[vm->PC.val ++];
 }
 
-// TODO: untested might fail
 static inline u16 get_pc_16(Machine* vm) {
 	// returns the simultaneous 16 bit value pointed by PC and increments the PC twice
 	u8 hi  =  vm->mem->stream[vm->PC.val ++];
 	u8 lo  =  vm->mem->stream[vm->PC.val ++];
-	printf("%x, %x, %x\n", hi,lo,combine_bytes(hi,lo));
 
 	return combine_bytes(hi,lo);
 }
@@ -25,7 +23,6 @@ static inline u8 get_flag(Machine *vm, u8 flag){
 	return 	((vm -> AF.lo) >> (7 - flag)) & 1 ;
 }
 
-// TODO: Might Fail
 static inline void set_flag (Machine *vm, u8 flag) {
 	u8 old = vm -> AF.lo;
 	vm -> AF.lo = old | (1 << (7 - flag));
@@ -250,6 +247,11 @@ void execute(Machine* vm, u8 opcode ) {
 			if (!get_flag(vm, FLAG_Z)) vm-> PC.val = get_pc_16(vm);
 			break;
 			
+		case 0xFE:
+			DPRINTF("PNT");
+			// TODO: REMOVE THIS
+			printf("%x\n",vm->AF.hi);
+			break;
 
 		// NOPS
 		case 0xEA:

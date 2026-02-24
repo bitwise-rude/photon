@@ -9,7 +9,7 @@
 #define get_nibble_lo(val) (val & 0b00001111)
 
 // Uncomment the below line when in production
-// #define NDEBUG 
+#define NDEBUG 
 
 #ifndef NDEBUG
     #define DPRINTF(fmt, ...) \

@@ -41,3 +41,22 @@ thing will be true;
 
 For memory operation like 25 MOV A,M <- M represents [memory address pointed by HL]
 -#
+
+
+#- References:
+
+Upper Nibbles reserved for the following
+Add - > 0001
+MOV - > 0010
+SUB - > 0011
+CMP - > 0100
+
+
+1. Flags
+Flag occpy the lower byte of AF register
+the bit information for each bit in the F register is:
+01234567
+0 -> ZERO FLAG ( the previous operation resulted in accumulator to be zero)
+1 -> CARRY FLAG ( the previous operation caused a carry, if in cmp, A is less than the argument)
+
+-#

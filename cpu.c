@@ -1,6 +1,24 @@
 // executing single byte opcode instructions
 #include "main.h"
 
+#define FLAG_Z 0
+#define FLAG_C 1
+
+u8 get_flag(Machine *vm, u8 flag){
+	return 	((vm -> AF.lo) >> (7 - flag)) & 1 ;
+}
+
+// TODO: Might Fail
+void set_flag (Machine *vm, u8 flag) {
+	u8 old = vm -> AF.lo;
+	vm -> AF.lo = old | (1 << (7 - flag));
+}
+
+void reset_flag (Machine *vm, u8 flag) {
+	u8 old = vm -> AF.lo;
+	vm -> AF.lo = old & ~(1 << (7 - flag));
+}
+
 void execute(u8 opcode, Machine* vm) {
 	switch (opcode) {
 		// Movs
@@ -118,6 +136,35 @@ void execute(u8 opcode, Machine* vm) {
 		case 0x16:
 			DPRINTF("ADD A, F");
 			vm->AF.hi += vm->AF.lo;
+			break;
+
+		// SUBS
+		case 0x30:
+			DPRINTF("SUB A, B");
+			vm->AF.hi -= vm->BC.hi;
+			if (vm -> AF.hi < vm -> BC.hi) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == vm -> BC.hi) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+		
+		// CMPS
+		case 0x40:
+			DPRINTF("CMP A, B");
+			
+			if (vm -> AF.hi < vm -> BC.hi) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == vm -> BC.hi){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+	
+		case 0xA0:
+			DPRINTF("JZ addr");
 			break;
 
 			// NOPS

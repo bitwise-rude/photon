@@ -10,7 +10,19 @@ ea - NOP - Do nothing
 21 - MOV A,C - Moves C's content to A
 22 - MOV A,D - Moves D's content to A
 23 - MOV A,E - Moves E's content to A
-24 - MOV A,F - Moves F's content to A
+24 - MOV A,H - Moves H's content to A
+25 - MOV A,L - Moves L's content to A
+26 - MOV A,F - Moves F's content to A
+27 - MOV A,M - Moves Memory pointed by HL to A
+
+28 - MOV B,B - Moves B's content to B
+29 - MOV B,C - Moves C's content to B
+2A - MOV B,D - Moves D's content to B
+2B - MOV B,E - Moves E's content to B
+2C - MOV B,H - Moves H's content to B
+2D - MOV B,L - Moves L's content to B
+2E - MOV B,F - Moves F's content to B
+2F - MOV B,M - Moves Memory pointed by HL to B
 
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 
@@ -26,4 +38,6 @@ For now, I have made that every instruction takes 1 machine cycle
 This is not correct because for some instruction, the actual CPU might take longer
 but later we have to use some kindof FPS to limit it and this actual 1 machine
 thing will be true;
+
+For memory operation like 25 MOV A,M <- M represents [memory address pointed by HL]
 -#

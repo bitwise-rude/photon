@@ -1,4 +1,9 @@
+#pragma once
+
 #include <stdint.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 #define get_nibble_hi(val) ((val & 0b11110000) >> 4)
 #define get_nibble_lo(val) (val & 0b00001111)

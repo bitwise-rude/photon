@@ -1,9 +1,12 @@
 ea - NOP - Do nothing
 10 - ADD A,B - Adds A and B and stores in A
+11 - ADD A,C - Adds A and C and stores in A
+12 - ADD A,D - Adds A and D and storees in A
+13 - ADD A,E - Adds A and E and stores in A
+14 - ADD A,F - Adds A and F and stores in A
 
 
 #- COMMENTS:
-
 For registers operation, the 1 byte opcode can be divided in to two 
 nibbles and the HI nibble will generally contain the instruction
 and the lower nibble will contain the registers that the instruction
@@ -13,4 +16,8 @@ In case of Add, the opcode is 10, 10 in binary is 0001 0000, the 0001 is the opc
 add and the last 0000 refers to A and B registers, this pattern is used everywhere
 making many things easier.
 
+For now, I have made that every instruction takes 1 machine cycle
+This is not correct because for some instruction, the actual CPU might take longer
+but later we have to use some kindof FPS to limit it and this actual 1 machine
+thing will be true;
 -#

@@ -19,13 +19,10 @@ int main()
 
 	// creating the virtual machine
 	Machine vm = (Machine) {
-		.regA = {0},
-		.regB = {0},
-		.regC = {0},
-		.regD = {0},
-		.regH = {0},
-		.regL = {0},
-		.regF = {0},
+		.AF = {},
+		.BC = {},
+		.DE = {},
+		.HL = {},
 
 		.PC.val = 0,
 		.SP.val = 0,
@@ -45,21 +42,37 @@ int main()
 
 		DPRINTF("\nTHE OPCODE FETCHED IS 0x%x", opcode);
 
-		// executing register based instructions
-		switch (opcode_hi) {
-			case 0x1:
-				DPRINTF("ADD Instruction Executed");
-				break;
-			default:
-				break;
-				
-		}
-
-		// executing other single byte opcode instructions
+		// executing single byte opcode instructions
 		switch (opcode) {
+			case 0x10:
+				DPRINTF("ADD A, B EXECUTED");
+				vm.AF.hi += vm.BC.hi;
+				break;
+
+			case 0x11:
+				DPRINTF("ADD A, C EXECUTED");
+				vm.AF.hi += vm.BC.lo;
+				break;
+
+			case 0x12:
+				DPRINTF("ADD A, D EXECUTED");
+				vm.AF.hi += vm.DE.hi;
+				break;
+
+			case 0x13:
+				DPRINTF("ADD A, E EXECUTED");
+				vm.AF.hi += vm.DE.lo;
+				break;
+
+			case 0x14:
+				DPRINTF("ADD A, F EXECUTED");
+				vm.AF.hi += vm.AF.lo;
+				break;
+
 			case 0xEA:
 				DPRINTF("NOP EXECUTED");
 				break;
+
 			default:
 				printf("INSTRUCTION NOT IMPLEMENTED\n");
 				exit(69);

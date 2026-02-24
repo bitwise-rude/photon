@@ -20,24 +20,20 @@ typedef struct {
 	u8 stream[1024];
 } Memory;
 
-typedef struct {
-	u8 val; 
-}REG8;
 
 typedef union {
-	REG8 hi;
-	REG8 lo;
+	struct {
+		u8 hi;
+		u8 lo;
+	};
 	u16 val;
 }REG16;	
 
 typedef struct {
-	REG8 regA; // Accumulator
-	REG8 regB;
-	REG8 regC;
-	REG8 regD;
-	REG8 regH;
-	REG8 regL;
-	REG8 regF; // Flag Register
+	REG16 AF;
+	REG16 BC;
+	REG16 DE;
+	REG16 HL;
 
 	REG16 PC;
 	REG16 SP;

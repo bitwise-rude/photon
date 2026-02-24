@@ -15,7 +15,7 @@ ea - NOP - Do nothing
 26 - MOV A,F - Moves F's content to A
 27 - MOV A,M - Moves Memory pointed by HL to A
 
-28 - MOV B,B - Moves B's content to B
+28 - MOV B,A - Moves A's content to B
 29 - MOV B,C - Moves C's content to B
 2A - MOV B,D - Moves D's content to B
 2B - MOV B,E - Moves E's content to B
@@ -24,14 +24,36 @@ ea - NOP - Do nothing
 2E - MOV B,F - Moves F's content to B
 2F - MOV B,M - Moves Memory pointed by HL to B
 
-30 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
+30 - MOV C,A - Moves A's content to C
+31 - MOV C,B - Moves B's content to C
+32 - MOV C,D - Moves D's content to C
+33 - MOV C,E - Moves E's content to C
+34 - MOV C,H - Moves H's content to C
+35 - MOV C,L - Moves L's content to C
+36 - MOV C,F - Moves F's content to C
+37 - MOV C,M - Moves Memory pointed by HL to C
 
-40 - CMP A,B - Subtracs B's content from A but doesn't store the result but zero flag and carry flag are affected
+0x38 - MOV D,A - Moves A's content to D
+0x39 - MOV D,B - Moves B's content to D
+0x3a - MOV D,C - Moves D's content to D
+0x3b - MOV D,E - Moves E's content to D
+0x3c - MOV D,H - Moves H's content to D
+0x3d - MOV D,L - Moves L's content to D
+0x3e - MOV D,F - Moves F's content to D
+0x3f - MOV D,M - Moves Memory pointed by HL to D
 
-50 - MVI A, <immediate> - Moves the immediate value to register A
-51 - MVI B, <immediate> - Moves the immediate value to register B
+80 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
 
-A0 - JZ addr - Jumps to addr if the zero flag is set 
+90 - CMP A,B - Subtracs B's content from A but doesn't store the result but zero flag and carry flag are affected
+
+a0 - MVI A, <immediate> - Moves the immediate value to register A
+a1 - MVI B, <immediate> - Moves the immediate value to register B
+a2 - MVI C, <immediate> - Moves the immediate value to register C
+
+b2 - DEC C - Decreases the value of C register
+
+b0 - JZ addr - Jumps to addr if the zero flag is set 
+b1 - JNZ addr - Jumps to addr if the zero flag is reset 
 
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 

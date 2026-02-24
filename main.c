@@ -12,15 +12,16 @@ int main()
 {
 	// creating the memory
 	u8 stream[1024] = {
-		0x50, 0x00,      // MVI A,0
-		0x51, 0x01,      // MVI B,1
-		0x52, 0x0A,      // MVI C,10   ; loop counter = 10
+		0xa0, 0x00,      // MVI A,0
+		0xa1, 0x01,      // MVI B,1
+		0xa2, 0x0A,      // MVI C,10   ; loop counter = 10
 
 		// loop_start (address 6)
+		0x38,		 // MOV D,A
 		0x10,            // ADD A,B    ; A = A+B
-		0x28,		// MOV B,A
-		0x62, 		// DEC C
-		0xA1, 0x00,0x06,       // JNZ 6       ; jump to loop_start
+		0x2A,		// MOV B,D
+		0xb2, 		// DEC C
+		0xc1, 0x00,0x06,       // JNZ 6       ; jump to loop_start
 		0x00 // EXITS
 	};
 	Memory mem = (Memory) {

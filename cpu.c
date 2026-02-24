@@ -240,12 +240,12 @@ void execute(Machine* vm, u8 opcode ) {
 			break;
 
 			// JMPS
-		case 0xb0:
+		case 0xc0:
 			DPRINTF("JZ addr");
 			if (get_flag(vm, FLAG_Z)) vm-> PC.val = get_pc_16(vm);
 			break;
 
-		case 0xb1:
+		case 0xc1:
 			DPRINTF("JNZ addr");
 			if (!get_flag(vm, FLAG_Z)) vm-> PC.val = get_pc_16(vm);
 			break;

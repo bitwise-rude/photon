@@ -52,8 +52,8 @@ a2 - MVI C, <immediate> - Moves the immediate value to register C
 
 b2 - DEC C - Decreases the value of C register
 
-b0 - JZ addr - Jumps to addr if the zero flag is set 
-b1 - JNZ addr - Jumps to addr if the zero flag is reset 
+c0 - JZ addr - Jumps to addr if the zero flag is set 
+c1 - JNZ addr - Jumps to addr if the zero flag is reset 
 
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 

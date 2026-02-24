@@ -6,6 +6,7 @@ u8 get_val_at_pc(Machine* vm) {
 	// returns the value pointed by PC and increments the PC
 	 return vm->mem->stream[vm->PC.val ++];
 }
+
 int main()
 {
 	// creating the memory

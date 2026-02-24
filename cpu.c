@@ -4,17 +4,33 @@
 #define FLAG_Z 0
 #define FLAG_C 1
 
-u8 get_flag(Machine *vm, u8 flag){
+#define combine_bytes(hi, lo) (hi << 8) | lo
+
+static inline u8 get_pc_8(Machine* vm) {
+	// returns the 8bit value pointed by PC and increments the PC
+	 return vm->mem->stream[vm->PC.val ++];
+}
+
+// TODO: untested might fail
+static inline u16 get_pc_16(Machine* vm) {
+	// returns the simultaneous 16 bit value pointed by PC and increments the PC twice
+	u8 hi  =  vm->mem->stream[vm->PC.val ++];
+	u8 lo  =  vm->mem->stream[vm->PC.val ++];
+
+	return combine_bytes(hi,lo);
+}
+
+static inline u8 get_flag(Machine *vm, u8 flag){
 	return 	((vm -> AF.lo) >> (7 - flag)) & 1 ;
 }
 
 // TODO: Might Fail
-void set_flag (Machine *vm, u8 flag) {
+static inline void set_flag (Machine *vm, u8 flag) {
 	u8 old = vm -> AF.lo;
 	vm -> AF.lo = old | (1 << (7 - flag));
 }
 
-void reset_flag (Machine *vm, u8 flag) {
+static inline void reset_flag (Machine *vm, u8 flag) {
 	u8 old = vm -> AF.lo;
 	vm -> AF.lo = old & ~(1 << (7 - flag));
 }
@@ -163,11 +179,13 @@ void execute(u8 opcode, Machine* vm) {
 
 			break;
 	
+		// JMPS
 		case 0xA0:
 			DPRINTF("JZ addr");
+			if (get_flag(vm, FLAG_Z)) vm->PC.val = get_pc_16(vm);
 			break;
 
-			// NOPS
+		// NOPS
 		case 0xEA:
 			DPRINTF("NOP");
 			break;

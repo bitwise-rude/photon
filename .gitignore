@@ -3,3 +3,17 @@
 builds/
 env/
 *.swo
+*.elf
+*.bin
+*.hex
+*.map
+/build/
+/CMakeCache.txt
+/CMakeFiles/
+/sdkconfig
+/.vscode/
+/*.log
+esp/build/
+esp/sdkconfig
+esp/CMakeCache.txt
+esp/CMakeFiles/

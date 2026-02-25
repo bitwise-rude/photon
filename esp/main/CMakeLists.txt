@@ -1,0 +1,9 @@
+idf_component_register(
+    SRCS
+        "app_main.c"
+        "../../cpu.c"
+        "../../memory.c"
+    INCLUDE_DIRS
+        "."
+        "../.."
+)

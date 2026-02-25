@@ -1,5 +1,5 @@
 #include <string.h>
-#include "main.h"
+#include <main.h>
 
 // Machine + CPU related function
 u8 get_val_at_pc(Machine* vm) {
@@ -8,12 +8,12 @@ u8 get_val_at_pc(Machine* vm) {
 }
 void execute(Machine* vm, u8 opcode);
 
-int main()
+void app_main(void)
 {
 	// creating the memory
-	
+	printf("Hello World\n");
 	/* Fibonacci sequence */
-	u8 stream[65535] = {
+	static u8 stream[65535] = {
 		0xa0, 0x00,      // MVI A,0
 		0xa1, 0x01,      // MVI B,1
 		0xa2, 0x0A,      // MVI C,10   ; loop counter = 10
@@ -51,10 +51,8 @@ int main()
 	// 	0xFE,              // PRINT result
 	// 	0x00               // EXIT
 	// };
-	Memory mem = (Memory) {
-		.stream = 0,
-	};
-	memcpy(mem.stream, stream, 65535);
+	static Memory mem;
+	memcpy(mem.stream, stream, sizeof(stream));
 
 	// creating the virtual machine
 	Machine vm = (Machine) {
@@ -81,6 +79,5 @@ int main()
 		vm.cycles += 1;
 		// printf("The value at regiser A is %x and B is %x\n",vm.AF.hi, vm.BC.hi);
 	}
-
-	return 0;
 }
+

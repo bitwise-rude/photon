@@ -50,7 +50,14 @@ a0 - MVI A, <immediate> - Moves the immediate value to register A
 a1 - MVI B, <immediate> - Moves the immediate value to register B
 a2 - MVI C, <immediate> - Moves the immediate value to register C
 
+b0 - DEC A - Decreases the value of A register
+b1 - DEC B - Decreases the value of B register
 b2 - DEC C - Decreases the value of C register
+b3 - DEC D - Decreases the value of D register
+b4 - DEC E - Decreases the value of E register
+b5 - DEC H - Decreases the value of H register
+b6 - DEC L - Decreases the value of L register
+b7 - DEC M - Decreases the value of M register
 
 c0 - JZ addr - Jumps to addr if the zero flag is set 
 c1 - JNZ addr - Jumps to addr if the zero flag is reset 

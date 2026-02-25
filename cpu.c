@@ -37,11 +37,88 @@ static inline void reset_flag (Machine *vm, u8 flag) {
 void execute(Machine* vm, u8 opcode ) {
 	switch (opcode) {
 		// Decs
+		case 0xb0:
+			DPRINTF("DEC A");
+			vm->AF.lo --;
+			break;
+
 		case 0xb2:
 			DPRINTF("DEC C");
 			vm->BC.lo --;
 			break;
 
+		case 0xb1:
+			DPRINTF("DEC B");
+			vm->BC.hi --;
+			break;
+
+		case 0xb3:
+			DPRINTF("DEC D");
+			vm->DE.hi --;
+			break;
+
+		case 0xb4:
+			DPRINTF("DEC E");
+			vm->DE.lo --;
+			break;
+
+		case 0xb5:
+			DPRINTF("DEC H");
+			vm->HL.hi --;
+			break;
+
+		case 0xb6:
+			DPRINTF("DEC L");
+			vm->HL.lo --;
+			break;
+
+		case 0xb7:
+			DPRINTF("DEC M");
+			u8 val = memory_read_8(vm->mem, vm->HL.val);
+			memory_write_8(vm->mem, vm->HL.val, val-1);
+			break;
+
+		// INCS
+		case 0xb8:
+			DPRINTF("INC A");
+			vm->AF.lo ++;
+			break;
+
+		case 0xba:
+			DPRINTF("INC C");
+			vm->BC.lo ++;
+			break;
+
+		case 0xb9:
+			DPRINTF("INC B");
+			vm->BC.hi ++;
+			break;
+
+		case 0xbb:
+			DPRINTF("INC D");
+			vm->DE.hi ++;
+			break;
+
+		case 0xbc:
+			DPRINTF("INC E");
+			vm->DE.lo ++;
+			break;
+
+		case 0xbd:
+			DPRINTF("INC H");
+			vm->HL.hi ++;
+			break;
+
+		case 0xbe:
+			DPRINTF("INC L");
+			vm->HL.lo ++;
+			break;
+
+		case 0xbf:
+			DPRINTF("INC M");
+			u8 val2 = memory_read_8(vm->mem, vm->HL.val);
+			memory_write_8(vm->mem, vm->HL.val, val2+1);
+			break;
 		// Movs
 		case 0x20:
 			DPRINTF("MOV A,B");
@@ -121,6 +198,46 @@ void execute(Machine* vm, u8 opcode ) {
 		case 0x2F:
 			DPRINTF("MOV B, M"); 
 			vm->BC.hi = memory_read_8(vm->mem,vm->HL.val);
+			break;
+
+		case 0x30:
+			DPRINTF("MOV C,A");
+			vm->BC.lo = vm->AF.hi;
+			break;
+
+		case 0x31:
+			DPRINTF("MOV C,B");
+			vm->BC.lo = vm->BC.lo;
+			break;
+
+		case 0x32:
+			DPRINTF("MOV C,D");
+			vm->BC.lo = vm->DE.hi;
+			break;
+
+		case 0x33:
+			DPRINTF("MOV C,E");
+			vm->BC.lo = vm->DE.lo;
+			break;
+
+		case 0x34:
+			DPRINTF("MOV C,H");
+			vm->BC.lo = vm->HL.hi;
+			break;
+
+		case 0x35:
+			DPRINTF("MOV C, L");
+			vm->BC.lo = vm->HL.lo;
+			break;
+
+		case 0x36:
+			DPRINTF("MOV C, F");
+			vm->BC.lo = vm->AF.lo;
+			break;
+
+		case 0x37:
+			DPRINTF("MOV C, M"); 
+			vm->BC.lo = memory_read_8(vm->mem,vm->HL.val);
 			break;
 
 		case 0x38:

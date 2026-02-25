@@ -11,7 +11,7 @@ void execute(Machine* vm, u8 opcode);
 int main()
 {
 	// creating the memory
-	u8 stream[1024] = {
+	u8 stream[65535] = {
 		0xa0, 0x00,      // MVI A,0
 		0xa1, 0x01,      // MVI B,1
 		0xa2, 0x0A,      // MVI C,10   ; loop counter = 10
@@ -28,7 +28,7 @@ int main()
 	Memory mem = (Memory) {
 		.stream = 0,
 	};
-	memcpy(mem.stream, stream, 1024);
+	memcpy(mem.stream, stream, 65535);
 
 	// creating the virtual machine
 	Machine vm = (Machine) {

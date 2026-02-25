@@ -1,5 +1,6 @@
 // executing single byte opcode instructions
 #include "main.h"
+#include "memory.h"
 
 #define FLAG_Z 0
 #define FLAG_C 1
@@ -8,13 +9,13 @@
 
 static inline u8 get_pc_8(Machine* vm) {
 	// returns the 8bit value pointed by PC and increments the PC
-	 return vm->mem->stream[vm->PC.val ++];
+	 return memory_read_8(vm->mem,vm->PC.val++);
 }
 
 static inline u16 get_pc_16(Machine* vm) {
 	// returns the simultaneous 16 bit value pointed by PC and increments the PC twice
-	u8 hi  =  vm->mem->stream[vm->PC.val ++];
-	u8 lo  =  vm->mem->stream[vm->PC.val ++];
+	u8 hi = memory_read_8(vm->mem, vm->PC.val ++);
+	u8 lo = memory_read_8(vm->mem, vm->PC.val ++);
 
 	return combine_bytes(hi,lo);
 }
@@ -79,7 +80,7 @@ void execute(Machine* vm, u8 opcode ) {
 
 		case 0x27:
 			DPRINTF("MOV A,M");
-			vm->AF.hi = vm->AF.lo; // TODO: IMplement
+			vm->AF.hi = memory_read_8(vm->mem,vm->HL.val);
 			break;
 
 		case 0x28:
@@ -118,7 +119,8 @@ void execute(Machine* vm, u8 opcode ) {
 			break;
 
 		case 0x2F:
-			DPRINTF("MOV B, M"); // TODO: Implement
+			DPRINTF("MOV B, M"); 
+			vm->BC.hi = memory_read_8(vm->mem,vm->HL.val);
 			break;
 
 		case 0x38:
@@ -157,7 +159,8 @@ void execute(Machine* vm, u8 opcode ) {
 			break;
 
 		case 0x3f:
-			DPRINTF("MOV D, M"); //TODO: Implement
+			vm->DE.hi = memory_read_8(vm->mem,vm->HL.val);
+			DPRINTF("MOV D, M"); 
 			break;
 
 		case 0xa0:

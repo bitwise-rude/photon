@@ -13,7 +13,7 @@ int main()
 	// creating the memory
 	
 	/* Fibonacci sequence */
-	u8 stream[65535] = {
+	static u8 stream[65535] = {
 		0xa0, 0x00,      // MVI A,0
 		0xa1, 0x01,      // MVI B,1
 		0xa2, 0x0A,      // MVI C,10   ; loop counter = 10
@@ -51,10 +51,9 @@ int main()
 	// 	0xFE,              // PRINT result
 	// 	0x00               // EXIT
 	// };
-	Memory mem = (Memory) {
-		.stream = 0,
-	};
-	memcpy(mem.stream, stream, 65535);
+	
+	static Memory mem;
+	memcpy(mem.stream, stream, sizeof(stream));
 
 	// creating the virtual machine
 	Machine vm = (Machine) {
@@ -84,3 +83,10 @@ int main()
 
 	return 0;
 }
+
+// entry point for esp
+void app_main()
+{
+	main();
+}
+

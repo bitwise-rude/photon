@@ -5,3 +5,6 @@ main : main.c memory.c cpu.c
 
 clean: 
 	rm builds/main
+
+esp: main.c memory.c cpu.c
+	idf.py -C esp/  build flash monitor

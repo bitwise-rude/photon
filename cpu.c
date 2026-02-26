@@ -588,7 +588,7 @@ void execute(Machine* vm, u8 opcode ) {
 			}
 			break;
 
-			// CMPS
+		// CMPS
 		case 0x90:
 			DPRINTF("CMP A, B");
 
@@ -602,7 +602,85 @@ void execute(Machine* vm, u8 opcode ) {
 
 			break;
 
-			// JMPS
+		case 0x91:
+			DPRINTF("CMP A, C");
+
+			if (vm -> AF.hi < vm -> BC.lo) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == vm -> BC.lo){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+
+		case 0x92:
+			DPRINTF("CMP A, D");
+
+			if (vm -> AF.hi < vm->DE.hi) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == vm->DE.hi){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+
+		case 0x93:
+			DPRINTF("CMP A, E");
+
+			if (vm -> AF.hi < vm -> DE.lo) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == vm -> DE.lo){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+
+		case 0x94:
+			DPRINTF("CMP A, H");
+
+			if (vm -> AF.hi < vm -> HL.hi) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == vm -> HL.hi){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+
+		case 0x95:
+			DPRINTF("CMP A, L");
+
+			if (vm -> AF.hi < vm -> HL.lo) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == vm -> HL.lo){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+
+		case 0x96:
+			DPRINTF("CMP A, C");
+			u8 val_cmp = memory_read_8(vm->mem,vm->HL.val);
+			if (vm -> AF.hi < val_cmp) {
+				// carry flag on
+				set_flag(vm, FLAG_C);
+			} else if ( vm -> AF.hi == val_cmp){
+				// zero flag on
+				set_flag(vm, FLAG_Z);
+			}
+
+			break;
+			
+		// JMPS
 		case 0xc0:
 			DPRINTF("JZ addr");
 			if (get_flag(vm, FLAG_Z)) vm-> PC.val = get_pc_16(vm);

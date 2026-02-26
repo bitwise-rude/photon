@@ -86,7 +86,14 @@ ea - NOP - Do nothing
 0x85 - SUB A,L - Subtracts L's content from A, carry and zero flag are affected
 0x86 - SUB A,M - Subtracts M's content from A, carry and zero flag are affected
 
-90 - CMP A,B - Subtracs B's content from A but doesn't store the result but zero flag and carry flag are affected
+#  zero flag and carry flag are affected through cmp instruction
+0x90 - CMP A,B - Subtracs B's content from A but doesn't store the result
+0x91 - CMP A,C - Subtracs C's content from A but doesn't store the result
+0x92 - CMP A,D - Subtracs D's content from A but doesn't store the result
+0x93 - CMP A,E - Subtracs E's content from A but doesn't store the result
+0x94 - CMP A,H - Subtracs H's content from A but doesn't store the result
+0x95 - CMP A,L - Subtracs L's content from A but doesn't store the result
+0x96 - CMP A,M - Subtracs M's content from A but doesn't store the result
 
 0xa0 - MVI A, <immediate> - Moves the immediate value to register A
 0xa1 - MVI B, <immediate> - Moves the immediate value to register B

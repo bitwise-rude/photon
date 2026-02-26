@@ -78,7 +78,13 @@ ea - NOP - Do nothing
 0x5e - MOV M,L - Moves L's content to M
 0x5f - MOV M,F - Moves remory pointed by F to M
 
-80 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
+0x80 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
+0x81 - SUB A,C - Subtracts C's content from A, carry and zero flag are affected
+0x82 - SUB A,D - Subtracts D's content from A, carry and zero flag are affected
+0x83 - SUB A,E - Subtracts E's content from A, carry and zero flag are affected
+0x84 - SUB A,H - Subtracts H's content from A, carry and zero flag are affected
+0x85 - SUB A,L - Subtracts L's content from A, carry and zero flag are affected
+0x86 - SUB A,M - Subtracts M's content from A, carry and zero flag are affected
 
 90 - CMP A,B - Subtracs B's content from A but doesn't store the result but zero flag and carry flag are affected
 

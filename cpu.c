@@ -516,13 +516,74 @@ void execute(Machine* vm, u8 opcode ) {
 			vm->AF.hi += vm->AF.lo;
 			break;
 
-			// SUBS
+		// SUBS
 		case 0x80:
-			DPRINTF("SUB A, B, %x, %x", vm->AF.hi, vm->BC.hi);
+			DPRINTF("SUB A,B"); 
 			vm->AF.hi -= vm->BC.hi;
 			if (vm -> AF.hi < vm -> BC.hi) {
 				set_flag(vm, FLAG_C); 
 			} else if (vm -> AF.hi == vm -> BC.hi) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+
+		case 0x81:
+			DPRINTF("SUB A,C"); 
+			vm->AF.hi -= vm->BC.lo;
+			if (vm -> AF.hi < vm -> BC.lo) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == vm -> BC.lo) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+
+		case 0x82:
+			DPRINTF("SUB A,D"); 
+			vm->AF.hi -= vm->DE.hi;
+			if (vm -> AF.hi < vm->DE.hi) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == vm->DE.hi) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+
+		case 0x83:
+			DPRINTF("SUB A,E"); 
+			vm->AF.hi -= vm->DE.lo;
+			if (vm -> AF.hi < vm->DE.lo) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == vm->DE.lo) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+
+		case 0x84:
+			DPRINTF("SUB A,H"); 
+			vm->AF.hi -= vm->HL.hi;
+			if (vm -> AF.hi < vm->HL.hi) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == vm->HL.hi) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+			
+		case 0x85:
+			DPRINTF("SUB A,L"); 
+			vm->AF.hi -= vm->HL.lo;
+			if (vm -> AF.hi < vm->HL.lo) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == vm->HL.lo) { 
+				set_flag(vm, FLAG_Z);
+			}
+			break;
+
+		case 0x86:
+			DPRINTF("SUB A,M"); 
+			u8 val_sub = memory_read_8(vm->mem,vm->HL.val);
+			vm->AF.hi -= val_sub;
+			if (vm -> AF.hi < val_sub) {
+				set_flag(vm, FLAG_C); 
+			} else if (vm -> AF.hi == val_sub) { 
 				set_flag(vm, FLAG_Z);
 			}
 			break;

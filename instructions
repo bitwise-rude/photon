@@ -42,22 +42,73 @@ ea - NOP - Do nothing
 0x3e - MOV D,F - Moves F's content to D
 0x3f - MOV D,M - Moves Memory pointed by HL to D
 
+0x40 - MOV E,A - Moves A's content to E
+0x41 - MOV E,B - Moves B's content to E
+0x42 - MOV E,C - Moves C's content to E
+0x43 - MOV E,D - Moves E's content to E
+0x44 - MOV E,H - Moves H's content to E
+0x45 - MOV E,L - Moves L's content to E
+0x46 - MOV E,F - Moves F's content to E
+0x47 - MOV E,M - Moves Memory pointed by HL to E
+
+0x48 - MOV H,A - Moves A's content to H
+0x49 - MOV H,B - Moves B's content to H
+0x4a - MOV H,C - Moves C's content to H
+0x4b - MOV H,D - Moves H's content to H
+0x4c - MOV H,E - Moves E's content to H
+0x4d - MOV H,L - Moves L's content to H
+0x4e - MOV H,F - Moves F's content to H
+0x4f - MOV H,M - Moves Memory pointed by HL to H
+
+0x50 - MOV L,A - Moves A's content to L
+0x51 - MOV L,B - Moves B's content to L
+0x52 - MOV L,C - Moves C's content to L
+0x53 - MOV L,D - Moves L's content to L
+0x54 - MOV L,E - Moves E's content to L
+0x55 - MOV L,H - Moves H's content to L
+0x56 - MOV L,F - Moves F's content to L
+0x57 - MOV L,M - Moves Memory pointed by HL to L
+
+0x58 - MOV M,A - Moves A's content to M
+0x59 - MOV M,B - Moves B's content to M
+0x5a - MOV M,C - Moves C's content to M
+0x5b - MOV M,D - Moves D's content to M
+0x5c - MOV M,E - Moves E's content to M
+0x5d - MOV M,H - Moves H's content to M
+0x5e - MOV M,L - Moves L's content to M
+0x5f - MOV M,F - Moves remory pointed by F to M
+
 80 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
 
 90 - CMP A,B - Subtracs B's content from A but doesn't store the result but zero flag and carry flag are affected
 
-a0 - MVI A, <immediate> - Moves the immediate value to register A
-a1 - MVI B, <immediate> - Moves the immediate value to register B
-a2 - MVI C, <immediate> - Moves the immediate value to register C
+0xa0 - MVI A, <immediate> - Moves the immediate value to register A
+0xa1 - MVI B, <immediate> - Moves the immediate value to register B
+0xa2 - MVI C, <immediate> - Moves the immediate value to register C
+0xa3 - MVI D, <immediate> - Moves the immediate value to register D
+0xa4 - MVI E, <immediate> - Moves the immediate value to register E
+0xa5 - MVI H, <immediate> - Moves the immediate value to register H
+0xa6 - MVI L, <immediate> - Moves the immediate value to register L
+0xa7 - MVI M, <immediate> - Moves the immediate value to register M
 
-b0 - DEC A - Decreases the value of A register
-b1 - DEC B - Decreases the value of B register
-b2 - DEC C - Decreases the value of C register
-b3 - DEC D - Decreases the value of D register
-b4 - DEC E - Decreases the value of E register
-b5 - DEC H - Decreases the value of H register
-b6 - DEC L - Decreases the value of L register
-b7 - DEC M - Decreases the value of M register
+
+0xb0 - DEC A - Decreases the value of A register
+0xb1 - DEC B - Decreases the value of B register
+0xb2 - DEC C - Decreases the value of C register
+0xb3 - DEC D - Decreases the value of D register
+0xb4 - DEC E - Decreases the value of E register
+0xb5 - DEC H - Decreases the value of H register
+0xb6 - DEC L - Decreases the value of L register
+0xb7 - DEC M - Decreases the value of M register
+
+0xb8 - INC A - Increases the value of A register
+0xb9 - INC B - Increases the value of B register
+0xba - INC C - Increases the value of C register
+0xbb - INC D - Increases the value of D register
+0xbc - INC E - Increases the value of E register
+0xbd - INC H - Increases the value of H register
+0xbe - INC L - Increases the value of L register
+0xbf - INC M - Increases the value of M register
 
 c0 - JZ addr - Jumps to addr if the zero flag is set 
 c1 - JNZ addr - Jumps to addr if the zero flag is reset 

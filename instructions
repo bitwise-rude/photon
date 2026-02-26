@@ -1,37 +1,40 @@
-ea - NOP - Do nothing
+0xea - NOP - Do nothing
 
-10 - ADD A,B - Adds A and B and stores in A
-11 - ADD A,C - Adds A and C and stores in A
-12 - ADD A,D - Adds A and D and storees in A
-13 - ADD A,E - Adds A and E and stores in A
-14 - ADD A,F - Adds A and F and stores in A
+0x10 - ADD A,B - Adds A and B and stores in A
+0x11 - ADD A,C - Adds A and C and stores in A
+0x12 - ADD A,D - Adds A and D and storees in A
+0x13 - ADD A,E - Adds A and E and stores in A
+0x14 - ADD A,H - Adds A and H and stores in A
+0x15 - ADD A,L - Adds A and L and stores in A
+0x16 - ADD A,F - Adds A and F and stores in A
+0x17 - ADD A,M - Adds A and M and stores in A
 
-20 - MOV A,B - Moves B's content to A
-21 - MOV A,C - Moves C's content to A
-22 - MOV A,D - Moves D's content to A
-23 - MOV A,E - Moves E's content to A
-24 - MOV A,H - Moves H's content to A
-25 - MOV A,L - Moves L's content to A
-26 - MOV A,F - Moves F's content to A
-27 - MOV A,M - Moves Memory pointed by HL to A
+0x20 - MOV A,B - Moves B's content to A
+0x21 - MOV A,C - Moves C's content to A
+0x22 - MOV A,D - Moves D's content to A
+0x23 - MOV A,E - Moves E's content to A
+0x24 - MOV A,H - Moves H's content to A
+0x25 - MOV A,L - Moves L's content to A
+0x26 - MOV A,F - Moves F's content to A
+0x27 - MOV A,M - Moves Memory pointed by HL to A
 
-28 - MOV B,A - Moves A's content to B
-29 - MOV B,C - Moves C's content to B
-2A - MOV B,D - Moves D's content to B
-2B - MOV B,E - Moves E's content to B
-2C - MOV B,H - Moves H's content to B
-2D - MOV B,L - Moves L's content to B
-2E - MOV B,F - Moves F's content to B
-2F - MOV B,M - Moves Memory pointed by HL to B
+0x28 - MOV B,A - Moves A's content to B
+0x29 - MOV B,C - Moves C's content to B
+0x2A - MOV B,D - Moves D's content to B
+0x2B - MOV B,E - Moves E's content to B
+0x2C - MOV B,H - Moves H's content to B
+0x2D - MOV B,L - Moves L's content to B
+0x2E - MOV B,F - Moves F's content to B
+0x2F - MOV B,M - Moves Memory pointed by HL to B
 
-30 - MOV C,A - Moves A's content to C
-31 - MOV C,B - Moves B's content to C
-32 - MOV C,D - Moves D's content to C
-33 - MOV C,E - Moves E's content to C
-34 - MOV C,H - Moves H's content to C
-35 - MOV C,L - Moves L's content to C
-36 - MOV C,F - Moves F's content to C
-37 - MOV C,M - Moves Memory pointed by HL to C
+0x30 - MOV C,A - Moves A's content to C
+0x31 - MOV C,B - Moves B's content to C
+0x32 - MOV C,D - Moves D's content to C
+0x33 - MOV C,E - Moves E's content to C
+0x34 - MOV C,H - Moves H's content to C
+0x35 - MOV C,L - Moves L's content to C
+0x36 - MOV C,F - Moves F's content to C
+0x37 - MOV C,M - Moves Memory pointed by HL to C
 
 0x38 - MOV D,A - Moves A's content to D
 0x39 - MOV D,B - Moves B's content to D
@@ -123,8 +126,8 @@ ea - NOP - Do nothing
 0xbe - INC L - Increases the value of L register
 0xbf - INC M - Increases the value of M register
 
-c0 - JZ addr - Jumps to addr if the zero flag is set 
-c1 - JNZ addr - Jumps to addr if the zero flag is reset 
+0xc0 - JZ addr - Jumps to addr if the zero flag is set 
+0xc1 - JNZ addr - Jumps to addr if the zero flag is reset 
 
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 

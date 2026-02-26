@@ -480,7 +480,7 @@ void execute(Machine* vm, u8 opcode ) {
 			memory_write_8(vm->mem,vm->HL.val, get_pc_8(vm));
 			break;
 
-			// Adds
+		// Adds
 		case 0x10:
 			DPRINTF("ADD A, B");
 			vm->AF.hi += vm->BC.hi;
@@ -514,6 +514,11 @@ void execute(Machine* vm, u8 opcode ) {
 		case 0x16:
 			DPRINTF("ADD A, F");
 			vm->AF.hi += vm->AF.lo;
+			break;
+
+		case 0x17:
+			DPRINTF("ADD A, M");
+			vm->AF.hi += memory_read_8(vm->mem, vm->HL.val);
 			break;
 
 		// SUBS

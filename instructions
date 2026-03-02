@@ -160,6 +160,8 @@ The memory mapped layout consisiting of several parts is explained below
              Memory Address             |         Mappings
  
   	     0x0000 - 0xFEFF                     Program ROM 
+	     0xFF00				 Timer Control
+	     0xFF01				 Timer Read 
 
 #- References:
 
@@ -177,5 +179,14 @@ the bit information for each bit in the F register is:
 01234567
 0 -> ZERO FLAG ( the previous operation resulted in accumulator to be zero)
 1 -> CARRY FLAG ( the previous operation caused a carry, if in cmp, A is less than the argument)
+
+2. Timer Control
+0xFF00 is the timer control register, this is an 8 bit register which is mapped directly to the timer
+the structure is similar as below;
+
+BITS : 01234567
+0 	-> Enable/ Disable
+
+0xFF01 is the timer read instruction, if timer is enabled using the timer control register than, the value at this register will be decremented as per the frequency selected. 
 
 -#

@@ -1,7 +1,7 @@
 all : main
 
-main : main.c memory.c cpu.c
-	gcc -Wall -Wextra main.c cpu.c memory.c -o builds/main
+main : main.c memory.c cpu.c platform/linux/timer.c
+	gcc -Wall -Wextra -Ipthread -lpthread -Iplatform/ platform/linux/timer.c main.c cpu.c memory.c -o builds/main
 
 clean: 
 	rm builds/main

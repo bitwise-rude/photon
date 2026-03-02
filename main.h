@@ -26,8 +26,8 @@ typedef uint16_t u16 ;
 
 typedef union {
 	struct {
-		u8 hi;
 		u8 lo;
+		u8 hi;
 	};
 	u16 val;
 }REG16;	

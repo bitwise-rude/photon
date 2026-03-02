@@ -147,6 +147,19 @@ thing will be true;
 For memory operation like 25 MOV A,M <- M represents [memory address pointed by HL]
 -#
 
+#- Memory Layout:
+
+The memory mapped layout consisiting of several parts is explained below
+
+ * Memory.h includes Memory Mappings to several controllers and timers, screen, etc.
+ * Memory shouldn't be accessed through other means expect the following two methods
+ * Memory mappings are (or will be) done in two functions listed below.
+ *
+ * Below are the mappings:
+ *
+             Memory Address             |         Mappings
+ 
+  	     0x0000 - 0xFEFF                     Program ROM 
 
 #- References:
 

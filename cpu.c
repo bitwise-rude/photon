@@ -1,6 +1,5 @@
 // executing single byte opcode instructions
 #include "main.h"
-#include "memory.h"
 
 #define FLAG_Z 0
 #define FLAG_C 1

@@ -43,7 +43,7 @@ u8 timer_val_read(){
 	return atomic_load(&timer_val);
 }
 
-void timer_val_write(int val)
+void timer_val_write(u8 val)
 {
 	atomic_store(&timer_val,val);
 }

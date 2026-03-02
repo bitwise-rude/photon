@@ -3,7 +3,10 @@ idf_component_register(
         "../../main.c"
         "../../cpu.c"
         "../../memory.c"
+	"../../platform/esp/timer.c"
     INCLUDE_DIRS
         "."
         "../.."
+	"../../platform/esp/"
+	"../../platform/"
 )

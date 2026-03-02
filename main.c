@@ -21,7 +21,7 @@ int main()
 		0x58,		// MOV M,A
 		0xBE,		// INC L
 		0x58,		// MOV M,A
-		0xA1, 0x00,	// MVI B,10
+		0xA1, 0x0a,	// MVI B,10
 
 		// loop_start (address 6)
 		0x27,		// MOV A,M

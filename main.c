@@ -12,24 +12,39 @@ void execute(Machine* vm, u8 opcode);
 int main()
 {
 	// creating the memory
-	
-	/* Timer Test */
-	static u8 stream[65535] = {
-		0xa5, 0xFF,     // MVI H,FF
-		0xa6, 0x00,     // MVI L,00
-		0xa0, 0xFF,	// MVI A, FF
-		0x58,		// MOV M,A
-		0xBE,		// INC L
-		0x58,		// MOV M,A
-		0xA1, 0x0a,	// MVI B,10
+	static u8 stream[65535] = { 
+0xa5,  0xFF,
+0xa6,  0x00,
+0xa0,  0xFF,
+0x58,
+0xbe,
+0x58,
+0xa1,  0x0a,
+0x27,
+0xfe,
+0x90,
+0xc1,  0x00,  0x0b,
+0xeb,
 
-		// loop_start (address 6)
-		0x27,		// MOV A,M
-		0xfe,		// PRINT
-		0x90, 		// CMP A,B
-		0xc1, 0x00,0x0b,// JNZ a       ; jump to loop_start
-		0x00 // EXITS
-	};
+};
+
+	/* Timer Test */
+	// static u8 stream[65535] = {
+	// 	0xa5, 0xFF,     // MVI H,FF
+	// 	0xa6, 0x00,     // MVI L,00
+	// 	0xa0, 0xFF,	// MVI A, FF
+	// 	0x58,		// MOV M,A
+	// 	0xBE,		// INC L
+	// 	0x58,		// MOV M,A
+	// 	0xA1, 0x0a,	// MVI B,10
+	//
+	// 	// loop_start (address 6)
+	// 	0x27,		// MOV A,M
+	// 	0xfe,		// PRINT
+	// 	0x90, 		// CMP A,B
+	// 	0xc1, 0x00,0x0b,// JNZ a       ; jump to loop_start
+	// 	0x00 // EXITS
+	// };
 
 	// u8 stream[65535] = {
 	//

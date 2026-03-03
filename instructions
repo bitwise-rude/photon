@@ -98,14 +98,14 @@
 0x95 - CMP A,L - Subtracs L's content from A but doesn't store the result
 0x96 - CMP A,M - Subtracs M's content from A but doesn't store the result
 
-0xa0 - MVI A, <immediate> - Moves the immediate value to register A
-0xa1 - MVI B, <immediate> - Moves the immediate value to register B
-0xa2 - MVI C, <immediate> - Moves the immediate value to register C
-0xa3 - MVI D, <immediate> - Moves the immediate value to register D
-0xa4 - MVI E, <immediate> - Moves the immediate value to register E
-0xa5 - MVI H, <immediate> - Moves the immediate value to register H
-0xa6 - MVI L, <immediate> - Moves the immediate value to register L
-0xa7 - MVI M, <immediate> - Moves the immediate value to register M
+0xa0 - MVI A, <data> - Moves the immediate value to register A
+0xa1 - MVI B, <data> - Moves the immediate value to register B
+0xa2 - MVI C, <data> - Moves the immediate value to register C
+0xa3 - MVI D, <data> - Moves the immediate value to register D
+0xa4 - MVI E, <data> - Moves the immediate value to register E
+0xa5 - MVI H, <data> - Moves the immediate value to register H
+0xa6 - MVI L, <data> - Moves the immediate value to register L
+0xa7 - MVI M, <data> - Moves the immediate value to register M
 
 
 0xb0 - DEC A - Decreases the value of A register
@@ -126,8 +126,10 @@
 0xbe - INC L - Increases the value of L register
 0xbf - INC M - Increases the value of M register
 
-0xc0 - JZ addr - Jumps to addr if the zero flag is set 
-0xc1 - JNZ addr - Jumps to addr if the zero flag is reset 
+0xc0 - JZ <addr> - Jumps to addr if the zero flag is set 
+0xc1 - JNZ <addr> - Jumps to addr if the zero flag is reset 
+0xeb - EXIT - Exits the program
+0xfe - PRINT - Prints 'A' register to console 
 
 #- COMMENTS:
 For registers operation, the 1 byte opcode can be divided in to two 
@@ -181,12 +183,12 @@ the bit information for each bit in the F register is:
 1 -> CARRY FLAG ( the previous operation caused a carry, if in cmp, A is less than the argument)
 
 2. Timer Control
-0xFF00 is the timer control register, this is an 8 bit register which is mapped directly to the timer
+-0xFF00 is the timer control register, this is an 8 bit register which is mapped directly to the timer
 the structure is similar as below;
 
 BITS : 01234567
 0 	-> Enable/ Disable
 
-0xFF01 is the timer read instruction, if timer is enabled using the timer control register than, the value at this register will be decremented as per the frequency selected. 
+-0xFF01 is the timer read instruction, if timer is enabled using the timer control register than, the value at this register will be decremented as per the frequency selected. 
 
 -#

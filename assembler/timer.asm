@@ -1,0 +1,13 @@
+MVI H, FF
+MVI L, 00
+MVI A, FF
+MOV M,A
+INC L
+MOV M,A
+MVI B, 0a
+loop:
+MOV A,M
+PRINT
+CMP A,B
+JNZ 000b
+EXIT

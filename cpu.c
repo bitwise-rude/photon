@@ -38,43 +38,51 @@ void execute(Machine* vm, u8 opcode ) {
 		// Decs
 		case 0xb0:
 			DPRINTF("DEC A");
-			vm->AF.lo --;
+			vm->AF.hi --;
+			if (vm->AF.hi == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb2:
 			DPRINTF("DEC C");
 			vm->BC.lo --;
+			if (vm->BC.lo == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb1:
 			DPRINTF("DEC B");
 			vm->BC.hi --;
+			if (vm->BC.hi == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb3:
 			DPRINTF("DEC D");
 			vm->DE.hi --;
+			if (vm->DE.hi == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb4:
 			DPRINTF("DEC E");
 			vm->DE.lo --;
+			if (vm->DE.lo == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb5:
 			DPRINTF("DEC H");
 			vm->HL.hi --;
+			if (vm->HL.hi == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb6:
 			DPRINTF("DEC L");
 			vm->HL.lo --;
+			if (vm->HL.lo == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		case 0xb7:
 			DPRINTF("DEC M");
 			u8 val = memory_read_8(vm->mem, vm->HL.val);
 			memory_write_8(vm->mem, vm->HL.val, val-1);
+			if (val-1 == 0 ) set_flag(vm, FLAG_Z);
 			break;
 
 		// INCS

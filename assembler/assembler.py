@@ -41,10 +41,17 @@ while line_index < source_len:
     line = source[line_index]
 
     for insts in inst_hash.keys():
+        if line.startswith(";"):
+            break
         if insts[0] in line:
             if insts[1] == 'normal': code_gen+=inst_hash[insts] + ",\n"
             elif insts[1] == 'data': code_gen+=inst_hash[insts] + ",  0x" + line.replace(insts[0],"")[0:2] + ",\n"
             elif insts[1] == 'addr': code_gen+=inst_hash[insts] + ",  0x" + line.replace(insts[0],"")[0:2] + ",  0x" + line.replace(insts[0],"")[2:4]+",\n"
+            break
+    else:
+            print(insts[0], line)
+            print("ERROR, UNKNOWN INSTRUCTION AT LINE", line_index+1)
+            quit()
 
     line_index+=1
 code_gen += "\n};"

@@ -5,7 +5,7 @@ MOV M,A
 INC L
 MOV M,A
 MVI B, 0a
-loop:
+;loop:
 MOV A,M
 PRINT
 CMP A,B

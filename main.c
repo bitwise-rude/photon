@@ -1,6 +1,7 @@
 #include <string.h>
 #include "main.h"
 #include "memory.h"
+#include "ppu.h"
 
 // Machine + CPU related function
 u8 get_val_at_pc(Machine* vm) {
@@ -24,7 +25,7 @@ static u8 stream[65535] = {
 	0xfe,
 	0xb2,
 	0xc1,  0x00,  0x06,
-	0xeb,
+	0xc1, 0x00, 0x00
 
 };
 
@@ -73,6 +74,9 @@ static u8 stream[65535] = {
 	static Memory mem;
 	init_memory();
 	memcpy(mem.stream, stream, sizeof(stream));
+	
+	// TEMP framebuffer
+	u8 frame_buffer[64][128] = {0};
 
 	// creating the virtual machine
 	Machine vm = (Machine) {
@@ -87,6 +91,9 @@ static u8 stream[65535] = {
 		.cycles=0,
 		.mem = &mem,
 	};
+
+	// temp graphics init
+	graphics_init();
 			
 	// the fetch, decode and execute loop
 	
@@ -97,6 +104,8 @@ static u8 stream[65535] = {
 		DPRINTF("\nTHE OPCODE FETCHED IS 0x%x", opcode);
 		execute(&vm, opcode);
 		vm.cycles += 1;
+		// TEMP framebuffer to screen
+		show_buffer(frame_buffer);
 		// printf("The value at regiser A is %x and B is %x\n",vm.AF.hi, vm.BC.hi);
 	}
 

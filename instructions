@@ -81,6 +81,9 @@
 0x5e - MOV M,L - Moves L's content to M
 0x5f - MOV M,F - Moves remory pointed by F to M
 
+# LD Instructions
+0x60 - LD A, <address> - Loads the value at address to the A register
+
 0x80 - SUB A,B - Subtracts B's content from A, carry and zero flag are affected
 0x81 - SUB A,C - Subtracts C's content from A, carry and zero flag are affected
 0x82 - SUB A,D - Subtracts D's content from A, carry and zero flag are affected
@@ -161,9 +164,10 @@ The memory mapped layout consisiting of several parts is explained below
  *
              Memory Address             |         Mappings
  
-  	     0x0000 - 0xFEFF                     Program ROM 
+  	     0x0000 - 0xFAFF                     Program ROM 
 	     0xFF00				 Timer Control
 	     0xFF01				 Timer Read 
+	     0xFB00 - 0xFEFF			 VRAM
 
 #- References:
 
@@ -190,5 +194,18 @@ BITS : 01234567
 0 	-> Enable/ Disable
 
 -0xFF01 is the timer read instruction, if timer is enabled using the timer control register than, the value at this register will be decremented as per the frequency selected. 
+
+
+# The VRAM
+- The memory region from 0xFB00 to 0xFEFF is mapped to the VRAM, the memory is used for displaying pixels on a 128 x 64 screen. The total pixels 128x64 = 1024 bytes can either be black or white (1 bit per pixel). Without any buffer commands or any VBLANK interrupts that is found in traditional game consoles, the memory region is directly mapped so any change in values at that region directly affects the pixels in the screen. The PPU (pixel processing unit) reads from this section of memory and uses the pixel data and places it in the screen each PPU cycle.
+
+- The data in VRAM are stored in a page-way commonly used by I2C protocols and OLED displays. It works as follows:
+
+Each page = 8 rows of pixels
+128 columns and 8 pages total -> 1024 bytes.
+
+If you want to place something in x,y coordinate. then,
+page = y / 8
+addr = page * 128 + x 
 
 -#

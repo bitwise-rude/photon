@@ -691,6 +691,11 @@ void execute(Machine* vm, u8 opcode ) {
 			}
 
 			break;
+		case 0x60:
+			DPRINTF("LD A, addr");
+			u16 addr = get_pc_16(vm);
+			vm -> AF.hi = memory_read_8(vm->mem, addr);
+			break;
 			
 		// JMPS
 		case 0xc0:

@@ -12,8 +12,43 @@ void execute(Machine* vm, u8 opcode);
 
 int main()
 {
+	static u8 stream[] = {
+
+		/* HL = 0xFB00 */
+		0xa5, 0xFB,        // MVI H,0xFB
+		0xa6, 0x00,        // MVI L,0x00
+
+		/* byte 11111111 */
+		0xa0, 0xff,        // MVI A,0xFF
+		0x58,              // MOV M,A
+
+		/* next byte */
+		0xa5, 0xFB,
+		0xa6, 0x01,
+		0xa0, 0x81,
+		0x58,
+
+		/* next */
+		0xa5, 0xFB,
+		0xa6, 0x02,
+		0xa0, 0xBD,
+		0x58,
+
+		/* next */
+		0xa5, 0xFB,
+		0xa6, 0x03,
+		0xa0, 0x81,
+		0x58,
+
+		/* next */
+		0xa5, 0xFB,
+		0xa6, 0x04,
+		0xa0, 0xFF,
+		0x58,
+		0xc2, 0x00, 0x00
+	};
 	// creating the memory
-static u8 stream[65535] = { 
+// static u8 stream[65535] = { 
 	// 0xa0,  0x1
 	// 	,
 	// 0xa1,  0x1
@@ -25,9 +60,9 @@ static u8 stream[65535] = {
 	// 0xfe,
 	// 0xb2,
 	// 0xc1,  0x00,  0x06,
-	0xc2, 0x00, 0x00
+	// 0xc2, 0x00, 0x00
 
-};
+// };
 
 	/* Timer Test */
 	// static u8 stream[65535] = {
@@ -105,6 +140,30 @@ static u8 stream[65535] = {
 		vm.cycles += 1;
 		// TEMP framebuffer to screen
 		// TODO: FPS
+		
+		// memory mappings to framebuffer
+		int pixel = 0;
+
+		for(u16 j = 0xFB00; j <= 0xFEFF; j++)
+		{
+			u8 byte = memory_read_8(vm.mem, j);
+
+			for(int k = 0; k < 8; k++)
+			{
+				int x = pixel % 128;
+				int y = pixel / 128;
+
+				if(y >= 64)
+				{
+					printf("Framebuffer overflow\n");
+					exit(1);
+				}
+
+				frame_buffer[y][x] = (byte >> k) & 1;
+
+				pixel++;
+			}
+		}
 		
 		int shouldClose = show_buffer(frame_buffer);
 		if (shouldClose) {

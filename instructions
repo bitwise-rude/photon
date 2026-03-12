@@ -188,7 +188,7 @@ the bit information for each bit in the F register is:
 1 -> CARRY FLAG ( the previous operation caused a carry, if in cmp, A is less than the argument)
 
 2. Timer Control
--0xFF00 is the timer control register, this is an 8 bit register which is mapped directly to the timer
+-0xFF00 is the timer control register, this is an  bit register which is mapped directly to the timer
 the structure is similar as below;
 
 BITS : 01234567
@@ -200,13 +200,10 @@ BITS : 01234567
 # The VRAM
 - The memory region from 0xFB00 to 0xFEFF is mapped to the VRAM, the memory is used for displaying pixels on a 128 x 64 screen. The total pixels 128x64 = 1024 bytes can either be black or white (1 bit per pixel). Without any buffer commands or any VBLANK interrupts that is found in traditional game consoles, the memory region is directly mapped so any change in values at that region directly affects the pixels in the screen. The PPU (pixel processing unit) reads from this section of memory and uses the pixel data and places it in the screen each PPU cycle.
 
-- The data in VRAM are stored in a page-way commonly used by I2C protocols and OLED displays. It works as follows:
+- The data in VRAM are stored in a very simple and boring way. It works as follows:
 
-Each page = 8 rows of pixels
-128 columns and 8 pages total -> 1024 bytes.
-
-If you want to place something in x,y coordinate. then,
-page = y / 8
-addr = page * 128 + x 
+Starting from VRAM Address, each bit correspods to the next pixel color data, meaning
+0xFB00 -> has 8 bits -> color values from coordinates (0,0) to (0,7) 
+and so on... x coordinate and y coordinates are rounded, whenever they exceed their maximum value
 
 -#

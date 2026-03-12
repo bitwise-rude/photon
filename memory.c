@@ -31,6 +31,7 @@ void memory_write_8(Memory* mem, u16 addr, u8 val){
 	DPRINTF("[MEMORY WRITE AT %.04x WITH VALUE %.02x]\n", addr, val);
 
 	if (addr <= 0xFEFF) mem->stream[addr] = val;
+	
 
 	else if (addr == TIMER_CTRL)
 	{

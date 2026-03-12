@@ -712,6 +712,16 @@ void execute(Machine* vm, u8 opcode ) {
 			DPRINTF("JMP addr");
 			vm-> PC.val = get_pc_16(vm);
 			break;
+		
+		case 0xd0:
+			DPRINTF("PX ON");
+			vm->frame_buffer[vm->BC.lo][vm->BC.hi] = 1;
+			break;
+
+		case 0xd1:
+			DPRINTF("PX OFF");
+			vm->frame_buffer[vm->BC.lo][vm->BC.hi] = 0;
+			break;
 			
 		case 0xFE:
 			DPRINTF("PNT");

@@ -43,6 +43,9 @@ typedef struct {
 
 	size_t cycles;
 
+	// TEMP framebuffer
+	u8 frame_buffer[64][128];
+
 	Memory* mem;
 }Machine;
 

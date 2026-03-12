@@ -707,6 +707,11 @@ void execute(Machine* vm, u8 opcode ) {
 			DPRINTF("JNZ addr");
 			if (!get_flag(vm, FLAG_Z)) vm-> PC.val = get_pc_16(vm);
 			break;
+
+		case 0xc2:
+			DPRINTF("JMP addr");
+			vm-> PC.val = get_pc_16(vm);
+			break;
 			
 		case 0xFE:
 			DPRINTF("PNT");

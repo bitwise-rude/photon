@@ -14,18 +14,18 @@ int main()
 {
 	// creating the memory
 static u8 stream[65535] = { 
-	0xa0,  0x1
-		,
-	0xa1,  0x1
-		,
-	0xa2,  0xa ,
-	0x38,
-	0x10,
-	0x2A,
-	0xfe,
-	0xb2,
-	0xc1,  0x00,  0x06,
-	0xc1, 0x00, 0x00
+	// 0xa0,  0x1
+	// 	,
+	// 0xa1,  0x1
+	// 	,
+	// 0xa2,  0xa ,
+	// 0x38,
+	// 0x10,
+	// 0x2A,
+	// 0xfe,
+	// 0xb2,
+	// 0xc1,  0x00,  0x06,
+	0xc2, 0x00, 0x00
 
 };
 
@@ -100,12 +100,17 @@ static u8 stream[65535] = {
 	for (int i=0;i<=500000000000000;i++){
 		// fetch
 		u8 opcode = get_val_at_pc(&vm);
-
 		DPRINTF("\nTHE OPCODE FETCHED IS 0x%x", opcode);
 		execute(&vm, opcode);
 		vm.cycles += 1;
 		// TEMP framebuffer to screen
-		show_buffer(frame_buffer);
+		// TODO: FPS
+		
+		int shouldClose = show_buffer(frame_buffer);
+		if (shouldClose) {
+			DPRINTF("USER CLOSED THE DISPLAY\n");
+			break;
+		}
 		// printf("The value at regiser A is %x and B is %x\n",vm.AF.hi, vm.BC.hi);
 	}
 

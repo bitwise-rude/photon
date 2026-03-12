@@ -10,6 +10,11 @@ void graphics_init(){
 	InitWindow(SCREEN_WIDTH * SCREEN_SCALE, SCREEN_HEIGHT * SCREEN_SCALE, "03-10");
 }
 
-void show_buffer(u8 frame_buffer[64][128]){
-	while (1) {}
+int show_buffer(u8 frame_buffer[64][128]){
+	BeginDrawing();
+		ClearBackground(RAYWHITE);
+		DrawText("Hello World",190,200,20, LIGHTGRAY);
+	EndDrawing();
+
+	return WindowShouldClose();
 }

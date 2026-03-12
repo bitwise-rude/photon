@@ -131,6 +131,7 @@
 
 0xc0 - JZ <addr> - Jumps to addr if the zero flag is set 
 0xc1 - JNZ <addr> - Jumps to addr if the zero flag is reset 
+0xc2 - JMP <addr> - Unconditionally jumps to a addr
 0xeb - EXIT - Exits the program
 0xfe - PRINT - Prints 'A' register to console 
 

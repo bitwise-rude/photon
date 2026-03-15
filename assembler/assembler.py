@@ -1,6 +1,9 @@
 import sys
+import string
 
 INSTRUCTION_FILE = "instructions"
+ASCII_LETTER = string.ascii_lowercase
+COMMENT = ';' 
 
 def read_instruction_file()-> dict[tuple[str,str]:int]: 
     ''' Reads which instruction means which opcode '''
@@ -11,7 +14,12 @@ def read_instruction_file()-> dict[tuple[str,str]:int]:
     for lines in whole_content:
         if lines.startswith("0x"): 
             opcode = lines[0:4]
-            instr_full = lines.split(" - ")[1]
+            instr = lines.split(" - ")[1].split(" ")
+            instr_full = instr[0]
+            instr_args = []
+            for i in instr[1:]:
+                instr_args.append(i)
+            print(instr_args)
 
             if "<" in instr_full:
                 op_type = instr_full.split("<")[1].split(">")[0]
@@ -28,32 +36,33 @@ if len(sys.argv) < 2:
 
 inst_hash = read_instruction_file()
 
-# read source
+# print(inst_hash)
+
+# read source file
 with open(sys.argv[1], 'r') as file:
-    source = file.readlines()
+    content = file.readlines()
 
 # first pass
-code_gen = "static u8 stream[65535] = { \n"
+for i in range(len(content)):
+    line_no = i + 1
+    line_cont = content[i].lstrip().rstrip().lower()
+    line_tok = line_cont.split(" ")
 
-line_index = 0
-source_len = len(source)
-while line_index < source_len:
-    line = source[line_index]
+    # go through these tokens
+    j = 0
+    while j < len(line_tok): 
+        tok = line_tok[j]
 
-    for insts in inst_hash.keys():
-        if line.startswith(";"):
+        if tok == COMMENT:
             break
-        if insts[0] in line:
-            if insts[1] == 'normal': code_gen+=inst_hash[insts] + ",\n"
-            elif insts[1] == 'data': code_gen+=inst_hash[insts] + ",  0x" + line.replace(insts[0],"")[0:2] + ",\n"
-            elif insts[1] == 'addr': code_gen+=inst_hash[insts] + ",  0x" + line.replace(insts[0],"")[0:2] + ",  0x" + line.replace(insts[0],"")[2:4]+",\n"
-            break
-    else:
-            print(insts[0], line)
-            print("ERROR, UNKNOWN INSTRUCTION AT LINE", line_index+1)
-            quit()
-
-    line_index+=1
-code_gen += "\n};"
-print(code_gen)
+        elif tok in ASCII_LETTER:
+            word = ""
+            
+            while tok in ASCII_LETTER:
+                word += tok
+                if j+1 < len(line_tok): j+=1
+                else: break
+                tok = line_tok[j]
+        j += 1
+    print(line_tok)
 

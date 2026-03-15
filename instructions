@@ -169,10 +169,10 @@ The memory mapped layout consisiting of several parts is explained below
  *
              Memory Address             |         Mappings
  
-  	     0x0000 - 0xFAFF                     Program ROM 
-	     0xFF00				 Timer Control
-	     0xFF01				 Timer Read 
-	     0xFB00 - 0xFEFF			 VRAM
+  	     -0x0000 - 0xFAFF                     Program ROM 
+	     -0xFF00				 Timer Control
+	     -0xFF01				 Timer Read 
+	     -0xFB00 - 0xFEFF			 VRAM
 
 #- References:
 
@@ -207,7 +207,7 @@ BITS : 01234567
 - The data in VRAM are stored in a very simple and boring way. It works as follows:
 
 Starting from VRAM Address, each bit correspods to the next pixel color data, meaning
-0xFB00 -> has 8 bits -> color values from coordinates (0,0) to (0,7) 
+-0xFB00 -> has 8 bits -> color values from coordinates (0,0) to (0,7) 
 and so on... x coordinate and y coordinates are rounded, whenever they exceed their maximum value
 
 -#

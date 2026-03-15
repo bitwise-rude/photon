@@ -1,7 +1,7 @@
 ; fibonacci number for 03-10
 ; written by Meyan
 MVI A, 1
-MVI B, 1
+MVI B,            1
 MVI C, a ; counter
 ; loop: 
 MOV D,A
